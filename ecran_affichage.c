@@ -1,5 +1,8 @@
 #include "header.h"
 
+
+
+
 void accueil(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT], SDL_Renderer* renderer, SDL_Window* window)
 {
 	SDL_Rect rectTexture;
@@ -11,39 +14,17 @@ void accueil(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT]
 	rectTexture.y = 0;
 	rectTexture.h = AUTO_DEF_COO;
 
-	texture = SDL_TextureBmp("src/img/bg.bmp", surface, texture, font, &rectTexture, renderer, window);
-	SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
-	SDL_RenderPresent(renderer);
-
-	texture = SDL_Text("THE FORGE", CENTER, 50, FONT_ALGERIA, surface, texture, font, &rectTexture, renderer, window);
-
-	SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
-	SDL_RenderPresent(renderer);
-
-	SDL_Delay(1000);
-
-	texture = SDL_Bouton("VITRINE", CENTER, 200, FONT_AHRONBD,HOVER_FALSE, surface, texture, font, &rectTexture, renderer, window);
-	SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
-	
-	fromRectToBouton(rectTexture, &btn_vitrine);
-
-	texture = SDL_Bouton("INVENTAIRE", CENTER, 300, FONT_AHRONBD, HOVER_FALSE, surface, texture, font, &rectTexture, renderer, window);
-	SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
-
-	fromRectToBouton(rectTexture, &btn_inventaire);
-
-	texture = SDL_Bouton("AIDE", CENTER, 400, FONT_AHRONBD, HOVER_FALSE, surface, texture, font, &rectTexture, renderer, window);
-	SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
-
-	fromRectToBouton(rectTexture, &btn_aide);
-	SDL_RenderPresent(renderer);
 
 	/*----------------------BOUCLE---------------------*/
 	SDL_bool program_launched = SDL_TRUE;
+	unsigned int frame_limit = 0;
+	SDL_Event event;
+	
 	while (program_launched)
 	{
+		frame_limit = SDL_GetTicks() + FPS_Limit;
+
 		SDL_RenderClear(renderer);
-		SDL_Event event;
 		rectTexture.x = 0;
 		rectTexture.y = 0;
 		rectTexture.h = AUTO_DEF_COO;
@@ -54,6 +35,7 @@ void accueil(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT]
 		texture = SDL_Text("THE FORGE", CENTER, 50, FONT_ALGERIA, surface, texture, font, &rectTexture, renderer, window);
 		SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
 
+		//printf("\n V %d | A %d | I %d ", btn_vitrine.hover, btn_inventaire.hover, btn_aide.hover);
 		texture = SDL_Bouton("VITRINE", CENTER, 200, FONT_AHRONBD, btn_vitrine.hover, surface, texture, font, &rectTexture, renderer, window);
 		SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
 		fromRectToBouton(rectTexture, &btn_vitrine);
@@ -65,12 +47,10 @@ void accueil(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT]
 		texture = SDL_Bouton("AIDE", CENTER, 400, FONT_AHRONBD, btn_aide.hover, surface, texture, font, &rectTexture, renderer, window);
 		SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
 		fromRectToBouton(rectTexture, &btn_aide);
-		
-		SDL_RenderPresent(renderer);
+
 
 		while (SDL_PollEvent(&event))
 		{
-
 
 			switch (event.type)
 			{
@@ -89,16 +69,19 @@ void accueil(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT]
 				break;
 			case SDL_MOUSEMOTION:
 				//	printf("%d / %d\n", event.motion.x, event.motion.y);
-				if (onBouton(event,&btn_inventaire))
+				if (onBouton(event, &btn_vitrine))
 				{
-					break;
-				}
-				else if (onBouton(event, &btn_vitrine))
-				{
+					//printf("\nOn vitrine\n");
 					break;
 				}
 				else if (onBouton(event, &btn_inventaire))
 				{
+					//printf("\nOn inv\n");
+					break;
+				}
+				else if (onBouton(event, &btn_aide))
+				{
+					//printf("\nOn aide\n");
 					break;
 				}
 				break;
@@ -124,6 +107,9 @@ void accueil(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT]
 				break;
 			}
 		}
+
+		SDL_RenderPresent(renderer);
+		SDL_LimitFPS(frame_limit);
 	}
 
 	/*----------------------FIN------------------------*/

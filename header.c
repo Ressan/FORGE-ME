@@ -19,10 +19,12 @@ void SDL_ExitWithError(const char* message)
 void SDL_LimitFPS(unsigned int limit)
 {
     unsigned int ticks = SDL_GetTicks();
+
     if (limit < ticks)
         return;
     else if (limit > ticks + FPS_Limit)
         SDL_Delay(FPS_Limit);
     else
         SDL_Delay(limit - ticks);
+
 }

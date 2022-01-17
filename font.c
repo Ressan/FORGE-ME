@@ -93,16 +93,19 @@ Renvoie la texture avec le bouton bien positionner sur celle-ci
 */
 SDL_Texture* SDL_Bouton(const char* text, int x, int y, int num_font, int hover, SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT], SDL_Rect* rectTexture, SDL_Renderer* renderer, SDL_Window* window)
 {
+	//printf("\nTEST :  %d", TTF_GetFontOutline(font[num_font]));
+	/*if (TTF_GetFontOutline(font[num_font]) == 0)
+	{	
+		printf("\n%s | Hover %d", text, hover);
+		//printf("\n >> time :  % d", (SDL_GetTicks() % 2));
+	}*/
+		TTF_SetFontOutline(font[num_font], hover);
 	texture = SDL_Text(text, x, y, num_font, surface, texture, font, rectTexture, renderer, window);
 
 	if (SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
 		SDL_ExitWithError("Impossible changer couleur rendu");
 
-	if (TTF_GetFontOutline(font[num_font]) == 0)
-	{	
-		TTF_SetFontOutline(font[num_font], hover);
-		printf("\n%s | Hover %d", text, hover);
-	}
+
 
 
 	//if (SDL_RenderFillRect(renderer, rectTexture) != 0)
@@ -124,7 +127,7 @@ int onBouton(SDL_Event event,t_bouton* btn)
 	if (btn->x <= event.motion.x && event.motion.x <= (btn->x + btn->w) && btn->y <= event.motion.y && event.motion.y <= (btn->y + btn->h))
 	{
 		btn->hover = HOVER_TRUE;
-		printf("\n X %d < %d < %d X+W | Y %d < %d < %d Y+H\n", btn->x, event.motion.x, (btn->x + btn->w), btn->y, event.motion.y, (btn->y + btn->h));
+		//printf("\n X %d < %d < %d X+W | Y %d < %d < %d Y+H\n", btn->x, event.motion.x, (btn->x + btn->w), btn->y, event.motion.y, (btn->y + btn->h));
 	}
 	else
 		btn->hover = HOVER_FALSE;
