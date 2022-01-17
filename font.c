@@ -99,11 +99,11 @@ SDL_Texture* SDL_Bouton(const char* text, int x, int y, int num_font, int hover,
 		printf("\n%s | Hover %d", text, hover);
 		//printf("\n >> time :  % d", (SDL_GetTicks() % 2));
 	}*/
-		TTF_SetFontOutline(font[num_font], hover);
+	TTF_SetFontOutline(font[num_font], hover);
 	texture = SDL_Text(text, x, y, num_font, surface, texture, font, rectTexture, renderer, window);
 
 	if (SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible changer couleur rendu");
+		SDL_ExitWithError("Impossible changer style font");
 
 
 
@@ -122,7 +122,7 @@ void fromRectToBouton(SDL_Rect rect, t_bouton* btn)
 	btn->y = rect.y;
 }
 
-int onBouton(SDL_Event event,t_bouton* btn)
+int hoverBouton(SDL_Event event,t_bouton* btn)
 {
 	if (btn->x <= event.motion.x && event.motion.x <= (btn->x + btn->w) && btn->y <= event.motion.y && event.motion.y <= (btn->y + btn->h))
 	{

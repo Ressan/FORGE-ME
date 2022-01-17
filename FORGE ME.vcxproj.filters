@@ -27,7 +27,10 @@
     <ClCompile Include="font.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="ecran_affichage.c">
+    <ClCompile Include="page_accueil.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="page_inventaire.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -46,7 +49,10 @@
     <ClInclude Include="font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ecran_affichage.h">
+    <ClInclude Include="page_accueil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="page_inventaire.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,7 +9,8 @@
 #include <time.h>
 #include "font.h"
 #include "image.h"
-#include "ecran_affichage.h"
+#include "page_accueil.h"
+#include "page_inventaire.h"
 
 //Screen dimension constants
 

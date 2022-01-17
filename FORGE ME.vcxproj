@@ -145,17 +145,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ecran_affichage.c" />
+    <ClCompile Include="page_accueil.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="image.c" />
     <ClCompile Include="header.c" />
     <ClCompile Include="font.c" />
+    <ClCompile Include="page_inventaire.c" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\img\bg.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ecran_affichage.h" />
+    <ClInclude Include="page_inventaire.h" />
+    <ClInclude Include="page_accueil.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="font.h" />
     <ClInclude Include="image.h" />

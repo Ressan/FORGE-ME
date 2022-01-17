@@ -30,6 +30,6 @@ SDL_Texture* SDL_Bouton(const char* text, int x, int y, int num_font, int hover,
 
 void fromRectToBouton(SDL_Rect rect, t_bouton* btn);
 
-int onBouton(SDL_Event event, t_bouton* btn);
+int hoverBouton(SDL_Event event, t_bouton* btn);
 
 #endif // FONT_INCLUDED

@@ -26,8 +26,8 @@ int main(int argc, char** argv)
 	initFont(font, window, renderer, surface, texture);
 
 	/*----------------------BOUCLE---------------------*/
-
-	accueil(surface, texture, font, renderer, window);
+	pageAccueil(surface, texture, font, renderer, window);
+	printf("finito");
 	/*----------------------FIN------------------------*/
 
 	SDL_DestroyTexture(texture);
