@@ -25,8 +25,8 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[N
 		texture = SDL_Text("INVENTAIRE", CENTER, 50, FONT_ALGERIA, surface, texture, font, &rectTexture, renderer, window);
 		SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
 
-		//rectTexture.x =  (SCREEN_WIDTH -(CASE_W * CASE_NBC ))/ 2;
-		//rectTexture.y = BORD_H;
+		rectTexture.x =  (SCREEN_WIDTH -(CASE_W * CASE_NBC ))/ 2;
+		rectTexture.y = BORD_H;
 		rectTexture.w = CASE_W;
 		rectTexture.h = CASE_H;
 
