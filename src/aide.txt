@@ -1,0 +1,12 @@
+Bienvenue Forgeron !
+Les regles sont simples, tu peux forger des items
+et les stocker dans ton inventaire et une fois les items forger, tu pourras
+les vendres dans ta vitrine.
+L'objectif est d'etre le plus riche de tous les forgerons !
+Dans ta forge, tu pourras regarder
+ce qu'il te reste en stock dans la partie "Inventaire".
+Tu pourras egalement mettre en vente des objets
+pour gagner de l'or dans la partie "Vitrine".
+Si tu en as assez de forger, tu peux tout simplement quitter
+en cliquant sur le bouton "Quitter".
+N'hesite pas a revenir sur la partie "Aide" si tu oublie les regles.

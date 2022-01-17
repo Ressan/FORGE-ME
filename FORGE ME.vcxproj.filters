@@ -33,6 +33,9 @@
     <ClCompile Include="page_inventaire.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="page_aide.c">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\img\bg.bmp">
@@ -53,6 +56,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="page_inventaire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="page_aide.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

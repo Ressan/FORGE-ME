@@ -12,6 +12,7 @@
 #include "image.h"
 #include "page_accueil.h"
 #include "page_inventaire.h"
+#include "page_aide.h"
 
 //Screen dimension constants
 
