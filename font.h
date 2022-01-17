@@ -5,6 +5,7 @@
 #define FONT_LAZY 0
 #define FONT_ALGERIA 1
 #define FONT_AHRONBD 2
+#define FONT_DEFAULT_SIZE 48
 #define NB_FONT 3
 #define AUTO_DEF_COO -1
 #define CENTER -2
