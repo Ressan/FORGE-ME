@@ -3,7 +3,7 @@
 
 void initFont(TTF_Font* font[NB_FONT], SDL_Window* window, SDL_Renderer* renderer, SDL_Surface* surface, SDL_Texture* texture)
 {
-	font[FONT_LAZY] = TTF_OpenFont("src/font/lazy.ttf", 48);
+	font[FONT_LAZY] = TTF_OpenFont("src/font/lazy.ttf", FONT_DEFAULT_SIZE);
 	if (font[FONT_LAZY] == NULL)
 	{
 		TTF_CloseAllFont(font);
@@ -17,7 +17,7 @@ void initFont(TTF_Font* font[NB_FONT], SDL_Window* window, SDL_Renderer* rendere
 		SDL_DestroyAll(window, renderer, surface, texture);
 		SDL_ExitWithError("Creation font echoue");
 	}
-	font[FONT_AHRONBD] = TTF_OpenFont("src/font/ahronbd.ttf", 48);
+	font[FONT_AHRONBD] = TTF_OpenFont("src/font/ahronbd.ttf", FONT_DEFAULT_SIZE);
 	if (font[FONT_AHRONBD] == NULL)
 	{
 		TTF_CloseAllFont(font);

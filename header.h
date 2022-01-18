@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,6 +12,7 @@
 #include "image.h"
 #include "page_accueil.h"
 #include "page_inventaire.h"
+#include "page_aide.h"
 
 //Screen dimension constants
 

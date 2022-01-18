@@ -118,7 +118,7 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_F
 					}
 					else if (hoverBouton(event, &btn_aide))
 					{	
-						//aide(surface, texture, font, renderer, window);
+						pageAide(surface, texture, font, renderer, window);
 						//printf("\nOn aide\n"); break;
 					}
 					else if (hoverBouton(event, &btn_deconnexion))
