@@ -77,13 +77,11 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[
 	SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[3], renderer, window);
 	fromRectToBouton(rectTexture[3], &btn_retour);
 
-
 	rectBye.w = 500;
 	rectBye.h = 500;
 	rectBye.x = (SCREEN_WIDTH - rectBye.w) / 2;
 	rectBye.y = (SCREEN_HEIGHT - rectBye.h) / 2;
 	texture[4] = SDL_Text("BYE", CENTER, CENTER, FONT_LAZY, surface, texture[4], font, &rectBye, renderer, window);
-
 
 
 	while (inventaire_launched)
@@ -121,11 +119,11 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[
 
 		if (btn_retour.hover == HOVER_FALSE)
 		{
-			SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[2], renderer, window);
+			SDL_RenderCopySecure(surface, texture[2], font, &rectTexture[2], renderer, window);
 		}
 		else
 		{
-			SDL_RenderCopySecure(surface, texture[2], font, &rectTexture[2], renderer, window);
+			SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[2], renderer, window);
 		}
 
 		while (SDL_PollEvent(&event))
