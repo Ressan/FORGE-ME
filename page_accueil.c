@@ -7,9 +7,10 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 	t_bouton btn_aide = { 0,0,0,0,HOVER_TRUE };
 	t_bouton btn_deconnexion = { 0,0,0,0,HOVER_TRUE };
 	t_bouton btn_quitter = { 0,0,0,0,HOVER_TRUE };
-	SDL_Texture *texture[12];
+	SDL_Texture *texture[13];
 	SDL_Rect rectTexture[7];
 	SDL_Rect rectBye;
+	int i = 0, j = 0;
 
 
 	rectTexture[0].x = 0;
@@ -21,6 +22,11 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 	unsigned int frame_limit = 0;
 	SDL_Event event;
 
+	for (i = 0; i < 12; i++)
+	{
+		texture[i] = NULL;
+
+	}
 
 	//chargement fond d'eccran
 	texture[0] = SDL_TextureBmp("src/img/bg.bmp", surface, texture[0], font, &rectTexture[0], renderer, window);
@@ -79,7 +85,14 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 
 	texture[11] = SDL_Bouton("QUITTER", CENTER, 580, FONT_AHRONBD, btn_quitter.hover, surface, texture[11], font, &rectTexture[6], renderer, window);
 	SDL_RenderCopySecure(surface, texture[11], font, &rectTexture[6], renderer, window);
-	
+
+
+	rectBye.w = 500;
+	rectBye.h = 500;
+	rectBye.x = (SCREEN_WIDTH - rectBye.w) / 2;
+	rectBye.y = (SCREEN_HEIGHT - rectBye.h) / 2;
+	texture[12] = SDL_Text("BYE", CENTER, CENTER, FONT_LAZY, surface, texture[12], font, &rectBye, renderer, window);
+
 	while (program_launched)
 	{
 		frame_limit = SDL_GetTicks() + FPS_Limit;
@@ -89,11 +102,11 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 		//SDL_RenderCopySecure(surface, texture[0], font, &rectTexture[0], renderer, window);
 
 		
-		for (int i = 0; i < 2; i++)
+		for (i = 0; i < 2; i++)
 		{
 			SDL_RenderCopySecure(surface, texture[i], font, &rectTexture[i], renderer, window);
 		}
-		for (int i = 7; i < 12; i++)
+		for ( i = 7; i < 12; i++)
 		{
 			SDL_RenderCopySecure(surface, texture[i], font, &rectTexture[i], renderer, window);
 		}
@@ -153,20 +166,13 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 			{
 			case SDL_QUIT:
 				program_launched = SDL_FALSE;
-
-				/*
 				
 				SDL_RenderClear(renderer);
-				texture = SDL_Text("BYE", CENTER, CENTER, FONT_LAZY, surface, texture, font, &rectBye, renderer, window);
 
-				rectBye.w = 500;
-				rectBye.h = 500;
-				rectBye.x = (SCREEN_WIDTH - rectBye.w) / 2;
-				rectBye.y = (SCREEN_HEIGHT - rectBye.h) / 2;;
-				SDL_RenderCopySecure(surface, texture, font, &rectBye, renderer, window);
+				SDL_RenderCopySecure(surface, texture[12], font, &rectBye, renderer, window);
 				SDL_RenderPresent(renderer);
 				SDL_Delay(500);
-				*/
+				
 				break;
 			case SDL_MOUSEMOTION:
 				//	printf("%d / %d\n", event.motion.x, event.motion.y);
@@ -225,18 +231,13 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 					else if (hoverBouton(event, &btn_quitter))
 					{
 						program_launched = SDL_FALSE;
-						/*
-						SDL_RenderClear(renderer);
-						texture = SDL_Text("BYE", CENTER, CENTER, FONT_LAZY, surface, texture, font, &rectBye, renderer, window);
 
-						rectBye.w = 500;
-						rectBye.h = 500;
-						rectBye.x = (SCREEN_WIDTH - rectBye.w) / 2;
-						rectBye.y = (SCREEN_HEIGHT - rectBye.h) / 2;;
-						SDL_RenderCopySecure(surface, texture, font, &rectBye, renderer, window);
+						SDL_RenderClear(renderer);
+
+						SDL_RenderCopySecure(surface, texture[12], font, &rectBye, renderer, window);
 						SDL_RenderPresent(renderer);
 						SDL_Delay(500);
-						*/
+
 						
 						break;
 					}
@@ -249,6 +250,12 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 
 		SDL_RenderPresent(renderer);
 		SDL_LimitFPS(frame_limit);
+	}
+
+	for (i = 0; i < 12; i++)
+	{
+		SDL_DestroyTexture(texture[i]);
+
 	}
 }
 

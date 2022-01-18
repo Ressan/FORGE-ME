@@ -42,12 +42,19 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[
 	SDL_Texture* texture[5];
 	SDL_Rect rectTexture[4];
 	SDL_Rect grille;
+	SDL_Rect rectBye;
 	int i = 0, j = 0;
 
 	/*----------------------BOUCLE---------------------*/
 	SDL_bool inventaire_launched = SDL_TRUE;
 	unsigned int frame_limit = 0;
 	SDL_Event event;
+
+	for (i = 0; i < 5; i++)
+	{
+		texture[i] = NULL;
+
+	}
 
 	rectTexture[0].x = 0;
 	rectTexture[0].y = 0;
@@ -60,15 +67,24 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[
 	texture[1] = SDL_Text("INVENTAIRE", CENTER, 50, FONT_ALGERIA, surface, texture[1], font, &rectTexture[1], renderer, window);
 	SDL_RenderCopySecure(surface, texture[1], font, &rectTexture[1], renderer, window);
 
-	texture[2] = SDL_Bouton("< RETOUR", 50, 50, FONT_AHRONBD, btn_retour.hover, surface, texture, font, &rectTexture, renderer, window);
+	texture[2] = SDL_Bouton("< RETOUR", 50, 50, FONT_AHRONBD, btn_retour.hover, surface, texture[2], font, &rectTexture[2], renderer, window);
 	SDL_RenderCopySecure(surface, texture[2], font, &rectTexture[2], renderer, window);
 	fromRectToBouton(rectTexture[2], &btn_retour);
 
 	btn_retour.hover = HOVER_TRUE;
 
-	texture[3] = SDL_Bouton("< RETOUR", 50, 50, FONT_AHRONBD, btn_retour.hover, surface, texture, font, &rectTexture, renderer, window);
+	texture[3] = SDL_Bouton("< RETOUR", 50, 50, FONT_AHRONBD, btn_retour.hover, surface, texture[3], font, &rectTexture[3], renderer, window);
 	SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[3], renderer, window);
 	fromRectToBouton(rectTexture[3], &btn_retour);
+
+
+	rectBye.w = 500;
+	rectBye.h = 500;
+	rectBye.x = (SCREEN_WIDTH - rectBye.w) / 2;
+	rectBye.y = (SCREEN_HEIGHT - rectBye.h) / 2;
+	texture[4] = SDL_Text("BYE", CENTER, CENTER, FONT_LAZY, surface, texture[4], font, &rectBye, renderer, window);
+
+
 
 	while (inventaire_launched)
 	{
@@ -97,20 +113,20 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[
 			}
 		}
 
-			for (i = 0; i < 2; i++)
-			{
-				SDL_RenderCopySecure(surface, texture[i], font, &rectTexture[i], renderer, window);
-			}
+		for (i = 0; i < 2; i++)
+		{
+			SDL_RenderCopySecure(surface, texture[i], font, &rectTexture[i], renderer, window);
+		}
 
 
-			if (btn_retour.hover == HOVER_FALSE)
-			{
-				SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[2], renderer, window);
-			}
-			else
-			{
-				SDL_RenderCopySecure(surface, texture[2], font, &rectTexture[2], renderer, window);
-			}
+		if (btn_retour.hover == HOVER_FALSE)
+		{
+			SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[2], renderer, window);
+		}
+		else
+		{
+			SDL_RenderCopySecure(surface, texture[2], font, &rectTexture[2], renderer, window);
+		}
 
 		while (SDL_PollEvent(&event))
 		{
@@ -119,19 +135,13 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[
 			switch (event.type)
 			{
 			case SDL_QUIT:
-				/*
-				SDL_RenderClear(renderer);
-				texture = SDL_Text("BYE", CENTER, CENTER, FONT_LAZY, surface, texture, font, &rectTexture, renderer, window);
 
-				rectTexture.w = 500;
-				rectTexture.h = 500;
-				rectTexture.x = (SCREEN_WIDTH - rectTexture.w) / 2;
-				rectTexture.y = (SCREEN_HEIGHT - rectTexture.h) / 2;;
-				SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
+				SDL_RenderClear(renderer);
+
+				SDL_RenderCopySecure(surface, texture[4], font, &rectBye, renderer, window);
 				SDL_RenderPresent(renderer);
 				SDL_Delay(500);
-				
-				*/
+
 				inventaire_launched = SDL_FALSE;
 				break;
 			case SDL_MOUSEMOTION:
@@ -148,10 +158,9 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[
 				
 				*/
 				break;
-			case SDL_MOUSEBUTTONDOWN:
+			case SDL_MOUSEBUTTONUP:
 				if (event.button.button == SDL_BUTTON_LEFT)
 				{
-					SDL_Delay(20); // petit input lag (sensation de click)
 					
 					if (hoverBouton(event, &btn_retour))
 					{
@@ -167,6 +176,12 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[
 
 		SDL_RenderPresent(renderer);
 		SDL_LimitFPS(frame_limit);
+	}
+
+	for ( i = 0; i < 5; i++)
+	{
+		SDL_DestroyTexture(texture[i]);
+
 	}
 
 }
