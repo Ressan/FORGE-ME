@@ -1,4 +1,6 @@
 #include "header.h"
+
+
 void chargerTextAide(char* texteAide,SDL_Rect* rectTexture, SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT], SDL_Renderer* renderer, SDL_Window* window)
 {
 	char le_caractere;
@@ -17,13 +19,14 @@ void chargerTextAide(char* texteAide,SDL_Rect* rectTexture, SDL_Surface* surface
 		do
 		{
 			//puts(texteAide);
-			texture = SDL_Text(texteAide, BORD_W, BORD_H+i*30, FONT_AHRONBD, surface, texture, font, rectTexture, renderer, window);
+			texture = SDL_Text(texteAide, INV_BORD_W, INV_BORD_H+i*30, FONT_AHRONBD, surface, texture, font, rectTexture, renderer, window);
 			SDL_RenderCopySecure(surface, texture, font, rectTexture, renderer, window);
 			i++;
 		} while (fgets(texteAide, TEXTE_AIDE_LENGHT, fichier) != NULL);
 	}
 	fclose(fichier);
 }
+
 void pageAide(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT], SDL_Renderer* renderer, SDL_Window* window)
 {
 	char texteAide[TEXTE_AIDE_LENGHT];
@@ -54,7 +57,7 @@ void pageAide(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT
 		TTF_SetFontOutline(font[FONT_AHRONBD], NULL);
 		chargerTextAide(texteAide,&rectTexture, surface, texture, font, renderer, window);
 
-		texture = SDL_Text(texteAide, BORD_W, BORD_H, FONT_AHRONBD, surface, texture, font, &rectTexture, renderer, window);
+		texture = SDL_Text(texteAide, INV_BORD_W, INV_BORD_H, FONT_AHRONBD, surface, texture, font, &rectTexture, renderer, window);
 		SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
 		TTF_SetFontSize(font[FONT_AHRONBD], 48);
 

@@ -6,11 +6,13 @@ void SDL_DestroyAll(SDL_Window* window, SDL_Renderer* renderer,SDL_Surface* surf
     SDL_DestroyRenderer(renderer);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+
 }
 
 void SDL_ExitWithError(const char* message)
 {
     SDL_Log("ERREUR : %s > %s\n", message, SDL_GetError());
+    IMG_Quit();
     TTF_Quit();
     SDL_Quit();
     exit(EXIT_FAILURE);

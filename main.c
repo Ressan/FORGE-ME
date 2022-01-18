@@ -4,7 +4,7 @@ int main(int argc, char** argv)
 {
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
-
+	
 	//Lancement SDL
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		SDL_ExitWithError("Erreur initialisation SDL");
@@ -17,6 +17,11 @@ int main(int argc, char** argv)
 	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer) != 0)
 		SDL_ExitWithError("Creation fenetre et rendu echouee");
 
+	//Creation fenetre inits
+	if (IMG_Init(IMG_INIT_PNG) == 0)
+		SDL_ExitWithError("Init IMG echoue ");
+
+	srand(time(NULL));
 	/*----------------------ECRIRE---------------------*/
 	
 	TTF_Font* font[NB_FONT] = { NULL, NULL,NULL };

@@ -20,6 +20,16 @@
 #define SCREEN_HEIGHT 700
 #define FPS_Limit 16
 
+
+
+
+//Stockage visuel de la position dans la vitrine d'un item
+typedef struct vitrine
+{
+	int id;
+	int x, y;
+}t_vitrine;
+
 typedef struct forge
 {
 	char nom[25];
@@ -27,13 +37,6 @@ typedef struct forge
 	int coins;
 }t_forge;
 
-typedef struct objet
-{
-	char nomObjet[25];
-	int qteObjet;
-	int prixObjet;
-	char descObjet[50];
-}t_objet;
 
 void SDL_DestroyAll(SDL_Window* window, SDL_Renderer* renderer, SDL_Surface* surface, SDL_Texture* texture);
 
