@@ -9,6 +9,7 @@ void pageVitrine(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_F
 	t_inventaire inventaire[CASE_NBL][CASE_NBC];
 	initTypeObj(obj);
 	initInventaire(inventaire);
+
 	/*----------------------BOUCLE---------------------*/
 	SDL_bool inventaire_launched = SDL_TRUE;
 	unsigned int frame_limit = 0;

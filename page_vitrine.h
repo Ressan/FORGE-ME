@@ -6,8 +6,6 @@
 #define VITR_CASE_W 96
 #define VITR_CASE_H 96
 
-
-
 void pageVitrine(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT], SDL_Renderer* renderer, SDL_Window* window);
 
 #endif // PAGE_INVENTAIRE_H_INCLUDED

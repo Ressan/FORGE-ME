@@ -43,7 +43,7 @@ SDL_Texture* SDL_TextureBmp(const char* img, SDL_Surface* surface, SDL_Texture* 
 		SDL_ExitWithError("Creation surface echoue");
 	}
 
-	
+
 	return texture;
 }
 
