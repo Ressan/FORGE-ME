@@ -36,10 +36,12 @@ void initInventaire(t_inventaire inventaire[CASE_NBL][CASE_NBC])
 
 
 
-void pageInventaire(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[NB_FONT], SDL_Renderer* renderer, SDL_Window* window)
+void pageInventaire(SDL_Surface* surface, SDL_Texture* ohLaText, TTF_Font* font[NB_FONT], SDL_Renderer* renderer, SDL_Window* window)
 {
-	SDL_Rect rectTexture;
 	t_bouton btn_retour = { 0,0,0,0,HOVER_FALSE };
+	SDL_Texture* texture[5];
+	SDL_Rect rectTexture[4];
+	SDL_Rect grille;
 	int i = 0, j = 0;
 
 	/*----------------------BOUCLE---------------------*/
@@ -47,53 +49,77 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[N
 	unsigned int frame_limit = 0;
 	SDL_Event event;
 
+	rectTexture[0].x = 0;
+	rectTexture[0].y = 0;
+	rectTexture[0].h = AUTO_DEF_COO;
+	//chargement fond d'eccran
+	texture[0] = SDL_TextureBmp("src/img/bg.bmp", surface, texture[0], font, &rectTexture[0], renderer, window);
+	SDL_RenderCopySecure(surface, texture[0], font, &rectTexture[0], renderer, window);
+
+	//Chargement texte entete
+	texture[1] = SDL_Text("INVENTAIRE", CENTER, 50, FONT_ALGERIA, surface, texture[1], font, &rectTexture[1], renderer, window);
+	SDL_RenderCopySecure(surface, texture[1], font, &rectTexture[1], renderer, window);
+
+	texture[2] = SDL_Bouton("< RETOUR", 50, 50, FONT_AHRONBD, btn_retour.hover, surface, texture, font, &rectTexture, renderer, window);
+	SDL_RenderCopySecure(surface, texture[2], font, &rectTexture[2], renderer, window);
+	fromRectToBouton(rectTexture[2], &btn_retour);
+
+	btn_retour.hover = HOVER_TRUE;
+
+	texture[3] = SDL_Bouton("< RETOUR", 50, 50, FONT_AHRONBD, btn_retour.hover, surface, texture, font, &rectTexture, renderer, window);
+	SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[3], renderer, window);
+	fromRectToBouton(rectTexture[3], &btn_retour);
+
 	while (inventaire_launched)
 	{
 		frame_limit = SDL_GetTicks() + FPS_Limit;
 		SDL_RenderClear(renderer);
-		rectTexture.x = 0;
-		rectTexture.y = 0;
-		rectTexture.h = AUTO_DEF_COO;
-		texture = SDL_TextureBmp("src/img/bg.bmp", surface, texture, font, &rectTexture, renderer, window);
-		SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
 
 
-		texture = SDL_Text("INVENTAIRE", CENTER, 50, FONT_ALGERIA, surface, texture, font, &rectTexture, renderer, window);
-		SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
-
-		rectTexture.x =  (SCREEN_WIDTH -(INV_CASE_W * CASE_NBC ))/ 2;
-		rectTexture.y = INV_BORD_H;
-		rectTexture.w = INV_CASE_W;
-		rectTexture.h = INV_CASE_H;
+		grille.x =  (SCREEN_WIDTH -(INV_CASE_W * CASE_NBC ))/ 2;
+		grille.y = INV_BORD_H;
+		grille.w = INV_CASE_W;
+		grille.h = INV_CASE_H;
 
 		for (i = 0; i < CASE_NBC; i++)
 		{
-			rectTexture.x = i * INV_CASE_W + INV_BORD_W;
-			if (SDL_RenderDrawRect(renderer, &rectTexture) != 0)
+			grille.x = i * INV_CASE_W + INV_BORD_W;
+			if (SDL_RenderDrawRect(renderer, &grille) != 0)
 				SDL_ExitWithError(" Impossible dessiner Rectangle");
 			//SDL_RenderPresent(renderer);
 			for (j = 0; j < CASE_NBL; j++)
 			{
-				rectTexture.y = j * INV_CASE_H + INV_BORD_H;
+				grille.y = j * INV_CASE_H + INV_BORD_H;
 
-				if (SDL_RenderDrawRect(renderer, &rectTexture) != 0)
+				if (SDL_RenderDrawRect(renderer, &grille) != 0)
 					SDL_ExitWithError(" Impossible dessiner Rectangle");
 				//SDL_RenderPresent(renderer);
 			}
 		}
 
-		//printf("\n V %d | A %d | I %d ", btn_vitrine.hover, btn_inventaire.hover, btn_aide.hover);
-		texture = SDL_Bouton("< RETOUR", 50, 50, FONT_AHRONBD, btn_retour.hover, surface, texture, font, &rectTexture, renderer, window);
-		SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
-		fromRectToBouton(rectTexture, &btn_retour);
+			for (i = 0; i < 2; i++)
+			{
+				SDL_RenderCopySecure(surface, texture[i], font, &rectTexture[i], renderer, window);
+			}
+
+
+			if (btn_retour.hover == HOVER_FALSE)
+			{
+				SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[2], renderer, window);
+			}
+			else
+			{
+				SDL_RenderCopySecure(surface, texture[2], font, &rectTexture[2], renderer, window);
+			}
 
 		while (SDL_PollEvent(&event))
 		{
 
+
 			switch (event.type)
 			{
 			case SDL_QUIT:
-				inventaire_launched = SDL_FALSE;
+				/*
 				SDL_RenderClear(renderer);
 				texture = SDL_Text("BYE", CENTER, CENTER, FONT_LAZY, surface, texture, font, &rectTexture, renderer, window);
 
@@ -104,6 +130,9 @@ void pageInventaire(SDL_Surface* surface, SDL_Texture* texture, TTF_Font* font[N
 				SDL_RenderCopySecure(surface, texture, font, &rectTexture, renderer, window);
 				SDL_RenderPresent(renderer);
 				SDL_Delay(500);
+				
+				*/
+				inventaire_launched = SDL_FALSE;
 				break;
 			case SDL_MOUSEMOTION:
 				if (hoverBouton(event, &btn_retour))

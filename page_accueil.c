@@ -29,7 +29,7 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 	//Chargement texte entete
 	texture[1] = SDL_Text("THE FORGE", CENTER, 50, FONT_ALGERIA, surface, texture[1], font, &rectTexture[1], renderer, window);
 	SDL_RenderCopySecure(surface, texture[1], font, &rectTexture[1], renderer, window);
-	//printf("test");
+
 
 
 	//Chargement bouton pleins (quand on passe dessus)
@@ -86,13 +86,64 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 
 		SDL_RenderClear(renderer);
 		
-		rectTexture[0].x = 0;
-		rectTexture[0].y = 0;
-		rectTexture[0].h = AUTO_DEF_COO;
-		for (int i = 0; i < 12; i++)
+		//SDL_RenderCopySecure(surface, texture[0], font, &rectTexture[0], renderer, window);
+
+		
+		for (int i = 0; i < 2; i++)
 		{
 			SDL_RenderCopySecure(surface, texture[i], font, &rectTexture[i], renderer, window);
 		}
+		for (int i = 7; i < 12; i++)
+		{
+			SDL_RenderCopySecure(surface, texture[i], font, &rectTexture[i], renderer, window);
+		}
+
+
+		if (btn_vitrine.hover == HOVER_FALSE)
+		{
+			SDL_RenderCopySecure(surface, texture[7], font, &rectTexture[2], renderer, window);
+		}
+		else 
+		{
+			SDL_RenderCopySecure(surface, texture[2], font, &rectTexture[2], renderer, window);
+		}
+
+		if (btn_inventaire.hover == HOVER_FALSE)
+		{	
+			SDL_RenderCopySecure(surface, texture[8], font, &rectTexture[3], renderer, window);
+		}
+		else
+		{
+			SDL_RenderCopySecure(surface, texture[3], font, &rectTexture[3], renderer, window);
+		}
+
+		if (btn_aide.hover == HOVER_FALSE)
+		{
+			SDL_RenderCopySecure(surface, texture[9], font, &rectTexture[4], renderer, window);
+		}
+		else
+		{
+			SDL_RenderCopySecure(surface, texture[4], font, &rectTexture[4], renderer, window);
+		}
+
+		if (btn_deconnexion.hover == HOVER_FALSE)
+		{
+			SDL_RenderCopySecure(surface, texture[10], font, &rectTexture[5], renderer, window);
+		}
+		else
+		{
+			SDL_RenderCopySecure(surface, texture[5], font, &rectTexture[5], renderer, window);
+		}
+
+		if (btn_quitter.hover == HOVER_FALSE)
+		{
+			SDL_RenderCopySecure(surface, texture[11], font, &rectTexture[6], renderer, window);
+		}
+		else
+		{
+			SDL_RenderCopySecure(surface, texture[6], font, &rectTexture[6], renderer, window);
+		}
+
 
 
 		while (SDL_PollEvent(&event))
@@ -121,6 +172,7 @@ void pageAccueil(SDL_Surface* surface, SDL_Texture* ohlatext, TTF_Font* font[NB_
 				//	printf("%d / %d\n", event.motion.x, event.motion.y);
 				if (hoverBouton(event, &btn_vitrine))
 				{
+
 					//printf("\nOn vitrine\n");
 					break;
 				}
